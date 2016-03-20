@@ -1,0 +1,13 @@
+---
+
+galaxy_info:
+  author: klen
+  company: Stouts
+  description: Run docker registry
+  license: MIT
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  categories:
+  - system

@@ -1,0 +1,5 @@
+---
+
+- include: registry.yml
+  when: registry_enabled
+  tags: [docker-registry]

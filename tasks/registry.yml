@@ -1,0 +1,20 @@
+---
+
+- set_fact:
+    registry_volumes:
+    - "{{registry_home}}/data:/var/lib/registry"
+
+- set_fact:
+    registry_volumes: "{{registry_volumes + [registry_certs_home + ':/certs']}}"
+  when: registry_certs_home != ""
+
+- name: Setup and run docker-registry
+  docker:
+    image: "{{registry_image}}"
+    name: registry
+    restart_policy: always
+    volumes: "{{registry_volumes}}"
+    ports:
+    - "{{registry_port}}:5000"
+    env: "{{registry_env}}"
+    state: reloaded

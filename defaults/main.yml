@@ -1,0 +1,7 @@
+registry_enabled: yes
+
+registry_certs_home: ""
+registry_env: {}
+registry_home: /opt/docker-registry
+registry_image: "registry:2"
+registry_port: 5000

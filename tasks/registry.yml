@@ -10,11 +10,11 @@
 
 - name: Setup and run docker-registry
   docker:
+    env: "{{registry_env}}"
     image: "{{registry_image}}"
     name: registry
+    net: host
+    ports: "{{registry_ports}}"
     restart_policy: always
-    volumes: "{{registry_volumes}}"
-    ports:
-    - "{{registry_port}}:5000"
-    env: "{{registry_env}}"
     state: reloaded
+    volumes: "{{registry_volumes}}"

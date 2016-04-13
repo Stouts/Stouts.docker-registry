@@ -4,4 +4,5 @@ registry_certs_home: ""
 registry_env: {}
 registry_home: /opt/docker-registry
 registry_image: "registry:2"
-registry_port: 5000
+registry_net: host  # Set no (false) to use bridge
+registry_ports: []  # Set [host_port:container_port] for expose ports

@@ -15,6 +15,10 @@
     name: registry
     net: host
     ports: "{{registry_ports}}"
+    pull: always
     restart_policy: always
     state: reloaded
     volumes: "{{registry_volumes}}"
+
+- name: Copy clean script
+  template: src=clean.sh dest={{registry_home}}/clean.sh mode=0755

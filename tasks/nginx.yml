@@ -1,0 +1,10 @@
+---
+
+- name: Setup basic authentication
+  htpasswd: path={{registry_home}}/docker-registry.htpasswd name={{item.name}} password={{item.password}} owner=root group=www-data mode=0640
+  with_items: "{{registry_nginx_auth_users}}"
+  when: registry_nginx_auth
+
+- name: Setup nginx configuration
+  template: src=nginx.conf dest=/etc/nginx/sites-enabled/docker-registry.conf
+  notify: nginx reload

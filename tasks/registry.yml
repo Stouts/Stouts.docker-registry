@@ -5,15 +5,15 @@
     - "{{registry_home}}/data:/var/lib/registry"
 
 - set_fact:
-    registry_volumes: "{{registry_volumes + [registry_certs_home + ':/certs']}}"
-  when: registry_certs_home != ""
+    registry_volumes: "{{registry_volumes + [registry_ssl_dir]}}"
+  when: registry_ssl and not registry_nginx
 
 - name: Setup and run docker-registry
   docker:
     env: "{{registry_env}}"
     image: "{{registry_image}}"
     name: registry
-    net: host
+    net: "{{registry_net}}"
     ports: "{{registry_ports}}"
     pull: always
     restart_policy: always
@@ -22,3 +22,6 @@
 
 - name: Copy clean script
   template: src=clean.sh dest={{registry_home}}/clean.sh mode=0755
+
+- include: nginx.yml
+  when: registry_nginx

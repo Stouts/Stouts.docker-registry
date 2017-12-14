@@ -1,5 +1,5 @@
 ---
 
-- include: registry.yml
+- import_tasks: registry.yml
   when: registry_enabled
   tags: [docker-registry]

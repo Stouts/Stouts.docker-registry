@@ -10,9 +10,11 @@ registry_listen: 127.0.0.1
 registry_local_host: https://localhost:5000
 registry_port: 5000
 registry_ports: ["{{registry_listen}}:{{registry_port}}:5000"]
+registry_networks: []
 
 registry_net: bridge
 registry_nginx: no
+registry_nginx_port: 80
 registry_nginx_servername: "{{inventory_hostname}}"
 registry_nginx_auth: no
 registry_nginx_auth_users: [] # [{name: name, password: password}]

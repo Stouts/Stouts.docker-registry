@@ -9,15 +9,15 @@
   when: registry_ssl and not registry_nginx
 
 - name: Setup and run docker-registry
-  docker:
-    env: "{{registry_env}}"
+  docker_container:
     image: "{{registry_image}}"
     name: registry
-    net: "{{registry_net}}"
+    env: "{{registry_env}}"
+    network_mode: "{{registry_net}}"
+    networks: "{{registry_networks}}"
     ports: "{{registry_ports}}"
-    pull: always
+    pull: true
     restart_policy: always
-    state: reloaded
     volumes: "{{registry_volumes}}"
 
 - name: Copy clean script

@@ -12,10 +12,8 @@
     registry_env: "{{registry_env|combine(registry_env_auth)}}"
   when: registry_auth_users and not registry_nginx_auth
 
-- name: Setup basic authentication
-  shell: path={{registry_home}}/.htpasswd name={{item.name}} password={{item.password}} owner=root group=www-data mode=0640
-  with_items: "{{registry_auth_users}}"
-  when: registry_auth_users
+- name: Prepare registry directory
+  file: state=directory path={{registry_home}}
 
 - name: Setup and run docker-registry
   docker_container:
@@ -28,6 +26,11 @@
     pull: true
     restart_policy: always
     volumes: "{{registry_volumes}}"
+
+- name: Setup basic authentication
+  shell: docker run --entrypoint htpasswd {{registry_image}} -Bbn {{item.name}} {{item.password}} >> {{registry_home}}/.htpasswd
+  with_items: "{{registry_auth_users}}"
+  when: registry_auth_users
 
 - name: Copy clean script
   template: src=clean.sh dest={{registry_home}}/clean.sh mode=0755

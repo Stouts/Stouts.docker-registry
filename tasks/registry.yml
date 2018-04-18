@@ -28,7 +28,7 @@
     volumes: "{{registry_volumes}}"
 
 - name: Setup basic authentication
-  shell: docker run --entrypoint htpasswd {{registry_image}} -Bbn {{item.name}} {{item.password}} >> {{registry_home}}/.htpasswd
+  shell: docker run --rm --entrypoint htpasswd {{registry_image}} -Bbn {{item.name}} {{item.password}} >> {{registry_home}}/.htpasswd
   with_items: "{{registry_auth_users}}"
   when: registry_auth_users
 

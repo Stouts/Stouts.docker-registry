@@ -23,7 +23,7 @@
     network_mode: "{{registry_net}}"
     networks: "{{registry_networks}}"
     ports: "{{registry_ports}}"
-    pull: true
+    pull: "{{ registry_pull }}"
     restart_policy: always
     volumes: "{{registry_volumes}}"
 

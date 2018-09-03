@@ -11,6 +11,7 @@ registry_env_auth:
   REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
   REGISTRY_AUTH_HTPASSWD_PATH: /var/lib/registry/.htpasswd
 registry_volumes: ["{{registry_home}}:/var/lib/registry"]
+registry_pull: false
 
 registry_listen: 127.0.0.1
 registry_local_host: https://localhost:5000
